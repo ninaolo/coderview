@@ -1,0 +1,58 @@
+<div class="row">
+
+    <div class="col-lg-6 col-lg-offset-3 centering">
+        <h1>Insertion sort</h1>
+        <br>
+        <h3>What</h3>
+        <p>Stable sort with simple/compact code which sorts incrementally.</p>
+
+        <h3>Complexity</h3>
+        <p>Space: O(1)</p>
+        <p>Time worst: O(N^2) sorted backwards</p>
+        <p>Time best: O(N) already/nearly sorted</p>
+
+        <h3>Pros/cons</h3>
+        <p>Cons: slow for large N</p>
+        <p>Pros: good for small N, stable sort, doesn't use recursion, no additional space used</p>
+
+        <p>
+            For these reasons it's often used as the recursive base case (when the problem size is small) for higher
+            overhead divide-and-conquer sorting algorithms, such as merge sort or quick sort.
+        </p>
+
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <h3>Implementation</h3>
+    <pre>
+        <code ng-prism class="language-java">
+
+            public class Coderview {
+
+                public static int[] insertionSort(int[] input) {
+                    int temp;
+                    for (int i = 1; i < input.length; i++) {
+                        for(int j = i; j > 0; j--) {
+                            if (input[j] < input[j-1]) {
+                                temp = input[j];
+                                input[j] = input[j-1];
+                                input[j-1] = temp;
+                            }
+                        }
+                    }
+
+                    return input;
+                }
+
+            }
+
+        </code>
+    </pre>
+
+</div>
+
+

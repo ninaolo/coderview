@@ -1,0 +1,150 @@
+<div class="row">
+
+    <div class="col-lg-6 col-lg-offset-3 centering">
+        <h1>Delete Node in Linked List</h1>
+        <br>
+
+        <h3>Solution #1 (root is given)</h3>
+        <p>
+            If root is given, we can loop to the previous node and set its next node to the node after the deleted node.
+            The node will then be garbage collected.<br><br>
+
+            Bad argument: Delete node doesn't exist.<br>
+            Bad argument: Delete node is the only node in the list.<br>
+            Special case: Delete node is root.<br>
+
+        </p>
+
+        <h3>Solution #2 (root is not given)</h3>
+        <p>
+            We can only solve this with a more "ugly" solution - we'll swap Node values. If Node id's are final, we have
+            to mess up the id's. If not final, we could swap both values and id's.
+            <br><br>
+
+            NOTE: we must assume given node is not the tail.
+
+        </p>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <h3>Solution</h3>
+
+    <div class="tabbable" ng-init="tab = 1">
+        <ul class="nav nav-tabs">
+            <li ng-class="{'active': tab == 1}"><a ng-click="tab = 1">Solution #1</a></li>
+            <li ng-class="{'active': tab == 2}"><a ng-click="tab = 2">Solution #2</a></li>
+            <li ng-class="{'active': tab == 3}"><a ng-click="tab = 3">Linked List Node</a></li>
+        </ul>
+    </div>
+
+
+    <div class="tab-pane" ng-if="tab == 1">
+        <pre>
+            <code ng-prism class="language-java">
+
+                public class Coderview {
+
+                    public static Node delete(Node root, Node node) {
+
+                        // Special case: we want to delete root node.
+                        if (node == root) {
+                            if (root.getNext() == null) {
+                                throw new IllegalArgumentException("Can't delete only node in list.");
+                            }
+                            Node newRoot = root.getNext();
+                            root.setNext(null);
+                            return newRoot;
+                        }
+
+                        // Other case: node is in middle or the last node.
+                        Node previous = root;
+                        while (previous != null && previous.getNext() != node) {
+                            previous = previous.getNext();
+                        }
+
+                        if (previous == null) {
+                            throw new IllegalArgumentException("Given node does not exist in list.");
+                        }
+
+                        // Node will be garbage collected.
+                        previous.setNext(node.getNext());
+                        return root;
+                    }
+                }
+
+            </code>
+        </pre>
+    </div>
+
+    <div class="tab-pane" ng-if="tab == 2">
+        <pre>
+            <code ng-prism class="language-java">
+
+                public class Coderview {
+
+                    /**
+                     * Only handles nodes that aren't the tail.
+                     * Also messes up id's since it only swaps values, not actual nodes.
+                     */
+                    public static void delete(Node node) {
+                        if (node == null || node.getNext() == null) {
+                            throw new IllegalArgumentException("Bad argument.");
+                        }
+
+                        node.setValue(node.getNext().getValue());
+                        node.setNext(node.getNext().getNext());
+                    }
+                }
+
+            </code>
+        </pre>
+    </div>
+
+
+    <div class="tab-pane" ng-if="tab == 3">
+        <pre>
+            <code ng-prism class="language-java">
+
+                public class Node {
+
+                    private final int id;
+                    private Node next;
+                    private int value;
+
+                    public Node(int id, int value) {
+                        this.id = id;
+                        this.value = value;
+                    }
+
+                    public Node getNext() {
+                        return next;
+                    }
+
+                    public void setNext(Node next) {
+                        this.next = next;
+                    }
+
+                    public int getId() {
+                        return id;
+                    }
+
+                    public int getValue() {
+                        return value;
+                    }
+
+                    public void setValue(int value) {
+                        this.value = value;
+                    }
+                }
+
+            </code>
+        </pre>
+    </div>
+
+</div>
+
+

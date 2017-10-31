@@ -1,0 +1,65 @@
+
+<div class="row">
+
+    <div class="col-md-1 col-md-offset-3">
+        <a href="#/sorting/quicksort" class="btn btn-primary">QuickSort</a>
+    </div>
+    <div class="col-md-1 col-md-offset-1">
+        <a href="#/sorting/mergesort" class="btn btn-primary">MergeSort</a>
+    </div>
+    <div class="col-md-1 col-md-offset-1">
+        <a href="#/sorting/heapsort" class="btn btn-primary">HeapSort</a>
+    </div>
+
+</div>
+<br>
+<div class="row">
+
+    <div class="col-md-1 col-md-offset-3">
+        <a href="#/sorting/bubblesort" class="btn btn-primary">BubbleSort</a>
+    </div>
+
+
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-6 col-md-offset-3">
+        <h3 class="centering">Quicksort vs Mergesort</h3>
+
+        <h4>Comparison</h4>
+        <p>1. Mergesort is often a little slower than Quicksort. Why? It has a worse locality of reference
+         so access is faster in Quicksort than Mergesort. <br><br>
+            2. Mergesort guarantees O(N log N) --> reliable, even if we have already sorted
+            or equal elements. Quicksort doesn't, worst case is O(N^2). However, the worst case can be made very rare if
+            you choose a good pivot.<br><br>
+            3. Mergesort is a stable sort (doesn't reorder identical elements). Quicksort isn't.<br><br>
+            4. Mergesort uses more space O(N) because the overhead of merging. Quicksort only uses O(log N) for
+            recursion stack space.<br><br>
+        </p>
+
+        <h4>Mergesort - when to use?</h4>
+        <p>1. When worst case matters and you really can't have O(N^2).<br><br>
+        2. When you have a linked list. Nodes are scattered throughout memory so locality of reference doesn't matter.
+        Also, space required for merging linked lists is O(1) and not O(N).<br><br></p>
+
+        <h4>Quicksort - when to use?</h4>
+        <p>1. When worst case doesn't matter, and you want the one that is generally quicker.<br><br>
+            2. When space is limited.<br><br>
+        </p>
+
+        <h3 class="centering">HeapSort - the best?</h3>
+        <p>Might seem so with O(1) space and O(N log N) best/worst/average. BUT... <br><br>
+            1. In practice QuickSort + MergeSort have smaller constants (they're quicker) which doesn't show in Big-O.
+            <br><br>
+            2. HeapSort is not stable.<br><br>
+        </p>
+
+        <h3 class="centering">Other</h3>
+        <h4>Bubblesort</h4>
+        <p>Don't use. Has advantage on already sorted lists O(N), but that's about it.<br><br></p>
+
+    </div>
+
+</div>

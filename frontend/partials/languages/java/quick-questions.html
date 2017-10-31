@@ -1,0 +1,154 @@
+<div class="row">
+
+    <div class="col-lg-8 col-lg-offset-2">
+        <h1 class="centering">Quick Java Questions</h1>
+        <br>
+
+        <h4>What is the difference between creating a String with new() or with a String literal ("")?</h4>
+        <p>
+            new() --> heap<br>
+            String literal --> String pool<br><br>
+
+            The String pool is a part of the heap. Strings there are re-used.
+        </p>
+
+        <pre>
+            <code ng-prism class="language-java">
+                String s1 = "string pool test";
+                String s2 = "string pool test";
+                String s3 = new String("string pool test");
+
+                boolean pool = (s1 == s2); // true
+                boolean heap = (s1 == s3); // false
+            </code>
+        </pre>
+
+        <br>
+        <h4>StringBuffer vs StringBuilder</h4>
+        <p>
+            Both are used when we want to modify Strings a lot, which is not optimal with String objects since they are
+            immutable. <br><br>
+
+            StringBuilder --> faster and the "first choice".<br>
+            StringBuffer --> slower, but use this if you have concurrency issues.
+        </p>
+
+        <br>
+        <h4>ArrayList vs Vector</h4>
+        <p>
+            Concurrency --> Vector is synchronized, ArrayList not.<br>
+            Performance --> Vector is slow, ArrayList faster.<br>
+            Capacity --> Vector increases by 100%, ArrayList by 50%.<br>
+        </p>
+
+        <br>
+        <h4>ArrayList/Vector vs LinkedList</h4>
+        <p>
+            ArrayList/Vector --> when you want to index, O(1), and remove mainly from end, O(N - i).<br>
+            LinkedList --> when you want to remove from anywhere, O(1), and not index so much, O(i).<br>
+        </p>
+
+
+        <br>
+        <h4>Implement hashCode</h4>
+
+        <pre>
+            <code ng-prism class="language-java">
+
+                public class Student {
+                    boolean isCool;
+                    int age;
+                    String name;
+
+                    @Override
+                    public int hashCode() {
+                        int prime = 31;
+                        int result = age;
+                        result = prime * result + (name != null ? name.hashCode() : 0);
+                        result = prime * result + (isCool ? 1 : 0);
+                        return result;
+                    }
+
+                }
+            </code>
+        </pre>
+        <br>
+        <pre>
+            <code ng-prism class="language-java">
+                public class Student {
+                    boolean isCool;
+                    int age;
+                    String name;
+
+                    @Override
+                    public int hashCode() {
+                        HashCodeBuilder builder = new HashCodeBuilder();
+                        builder.append(isCool);
+                        builder.append(age);
+                        builder.append(name);
+                        return builder.toHashCode();
+                    }
+                }
+            </code>
+        </pre>
+
+        <br>
+        <h4>What do the different Access Modifiers do?</h4>
+        <ul>
+            <li>public --> any class can use.</li>
+            <li>protected --> classes in the same package and subclasses in any package can use.</li>
+            <li>private --> only this class can use.</li>
+            <li>no modifier ("package private") --> only classes in the same package can use.</li>
+        </ul>
+
+        <br>
+        <h4>Which Access Modifier should you use if only subclasses should have access?</h4>
+        <p>Use protected and have a separate package for the class hierarchy.</p>
+
+        <br>
+        <h4>What is a checked exception?</h4>
+        <ul>
+            <li>Usually caused by user error or a problem that can't be foreseen by the programmer.</li>
+            <li>Any subclass of Exception <i>except for</i> RuntimeException.</li>
+            <li>Must be surrounded by try/catch or declared by throws.</li>
+        </ul>
+
+        <br>
+        <h4>What is an unchecked exception?</h4>
+        <ul>
+            <li>Programming error.</li>
+            <li>Any subclass of RuntimeException.</li>
+            <li>Can be surrounded by try/catch or declared by throws but this isn't necessary.</li>
+        </ul>
+
+        <br>
+        <h4>Give an example usage of finally</h4>
+        <p>Usually for cleanup, such as closing sockets, db connections etc.</p>
+
+        <br>
+        <h4>How can you create concurrent threads in Java?</h4>
+        <pre>
+            <code ng-prism class="language-java">
+                TestRunnable a = new TestRunnable("A");
+                TestRunnable b = new TestRunnable("B");
+                TestRunnable c = new TestRunnable("C");
+
+                a.start();
+                b.start();
+                c.start();
+            </code>
+        </pre>
+
+        <br>
+        <h4>What class can you use if you want to store unique objects in some order?</h4>
+        <p>A TreeSet. No duplicates are stored and they are ordered with respect to compareTo().</p>
+
+        <br>
+        <h4>What is a final class/method?</h4>
+        <ul>
+            <li>Final class --> can't have subclasses.</li>
+            <li>Final method --> can't be overridden.</li>
+        </ul>
+    </div>
+
+</div>

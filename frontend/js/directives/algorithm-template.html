@@ -1,0 +1,38 @@
+<div class="row">
+
+    <div class="col-lg-6 col-lg-offset-3 centering">
+        <h1>{{heading}}</h1>
+        <br>
+        <h3>What</h3>
+        <p>{{what}}</p>
+
+        <br>
+        <h3>How</h3>
+        <ul class="list-group" ng-repeat="thing in howList">
+            <li class="list-group-item">{{thing}}</li>
+        </ul>
+
+        <h3>Complexity</h3>
+        <p>Average time: <span class="b">{{complexity.time.average}}</span></p>
+        <p>Worst time: <span class="b">{{complexity.time.worst}}</span></p>
+        <p>Best time: <span class="b">{{complexity.time.best}}</span></p>
+        <p>Space: <span class="b">{{complexity.space}}</span></p>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <h3>Implementation</h3>
+    <pre>
+        <code ng-prism class="language-java">
+
+            {{code}}
+
+        </code>
+    </pre>
+
+</div>
+
+

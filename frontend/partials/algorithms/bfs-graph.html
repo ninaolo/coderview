@@ -1,0 +1,164 @@
+<div class="row">
+
+    <div class="col-lg-6 col-lg-offset-3 centering">
+        <h1>Breadth First Search (BFS) on graphs</h1>
+        <br>
+        <h3>Difference from Tree</h3>
+        <p>Must also keep track of visited nodes to avoid going in circles or visiting
+        the same node multiple times.</p>
+
+        <br>
+
+        <h3>When to use BFS over DFS</h3>
+        <p>1. When we know <span class="b">solution(s) is close to root</span>.</p>
+        <p>2. When we want <span class="b">optimal/closest solution</span>.</p>
+        <p>3. If tree is very <span class="b">deep & solutions rare</span>, BFS could be quicker than DFS.</p>
+        <br>
+
+        <h3>Complexity</h3>
+        <p>Time: <span class="b">O(V + E)</span> --> in the worst case (if we're searching for something), every edge and every
+            vertex has to be looked at.</p>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="row">
+
+    <h3>Implementation</h3>
+
+    <div class="tabbable" ng-init="tab = 1">
+        <ul class="nav nav-tabs">
+            <li ng-class="{'active': tab == 1}"><a ng-click="tab = 1">BFS</a></li>
+            <li ng-class="{'active': tab == 2}"><a ng-click="tab = 2">Graph</a></li>
+            <li ng-class="{'active': tab == 3}"><a ng-click="tab = 3">Vertex</a></li>
+            <li ng-class="{'active': tab == 4}"><a ng-click="tab = 4">Edge</a></li>
+        </ul>
+        <div class="tab-content">
+
+
+            <div class="tab-pane" ng-class="{'active': tab == 1}" ng-if="tab == 1">
+                <pre>
+                    <code ng-prism class="language-java">
+
+                        public class Coderview {
+
+                            public static void breadthFirstTraversal(Vertex source) {
+                                LinkedList&lt;Vertex&gt; queue = new LinkedList<>();
+                                queue.add(source);
+
+                                Set&lt;Integer&gt; visited = new HashSet<>();
+                                visited.add(source.getId());
+
+                                while (!queue.isEmpty()) {
+                                    Vertex current = queue.poll();
+                                    System.out.println(current.getId());
+
+                                    for (Edge edge : current.getEdges()) {
+                                        Vertex neighbor = edge.getDestination();
+
+                                        if (!visited.contains(neighbor.getId())) {
+                                            visited.add(neighbor.getId());
+                                            queue.add(neighbor);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    </code>
+                </pre>
+            </div>
+
+
+            <div class="tab-pane" ng-class="{'active': tab == 2}" ng-if="tab == 2">
+                <pre>
+                    <code ng-prism class="language-java">
+
+                        public class Graph {
+
+                            private Vertex[] vertices;
+
+                            public Graph(Vertex[] vertices) {
+                                this.vertices = vertices;
+                            }
+
+                            public Vertex[] getVertices() {
+                                return vertices;
+                            }
+                        }
+
+                    </code>
+                </pre>
+            </div>
+
+
+            <div class="tab-pane" ng-class="{'active': tab == 3}" ng-if="tab == 3">
+                <pre>
+                    <code ng-prism class="language-java">
+
+                        public class Vertex {
+
+                            private int id;
+                            private Edge[] adjacencyList;
+
+                            public Vertex(int id) {
+                                this.id = id;
+                            }
+
+                            public int getId() {
+                                return id;
+                            }
+
+                            public Edge[] getEdges() {
+                                return adjacencyList == null ? new Edge[0] : adjacencyList;
+                            }
+
+                            public void setEdges(Edge[] adjacencyList) {
+                                this.adjacencyList = adjacencyList;
+                            }
+
+                        }
+
+                    </code>
+                </pre>
+            </div>
+
+
+            <div class="tab-pane" ng-class="{'active': tab == 4}" ng-if="tab == 4">
+                <pre>
+                    <code ng-prism class="language-java">
+
+                        public class Edge {
+
+                            private Vertex destination;
+                            private double weight;
+
+                            public Edge(Vertex destination, double weight) {
+                                this.destination = destination;
+                                this.weight = weight;
+                            }
+
+                            public Vertex getDestination() {
+                                return destination;
+                            }
+
+                            public double getWeight() {
+                                return weight;
+                            }
+                        }
+
+                    </code>
+                </pre>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+

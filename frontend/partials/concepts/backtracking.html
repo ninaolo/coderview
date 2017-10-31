@@ -1,0 +1,128 @@
+<div class="row">
+
+    <div class="col-lg-6 col-lg-offset-3 centering">
+        <h1>Backtracking</h1>
+        <br>
+
+        <h3>What</h3>
+        <p>
+            Using recursion (or stack) to examine all possible solutions/paths in a problem. If you reach a dead end,
+            you <span class="b">backtrack</span> (go back) to a previous state.
+        </p>
+        <br>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <h3>Example: find a word in a matrix</h3>
+    <p>
+        Let's say we have a matrix with chars and we want to find a certain word. A backtracking algorithm could step
+        through the matrix and look for paths, and if the path comes to an end, it backtracks to look for other
+        possibilities.<br><br>
+    </p>
+
+        <pre>
+        <code ng-prism class="language-java">
+            public class WordSearchMatrix {
+
+                private char[][] matrix;
+                private int N;
+                private char[][] solution;
+                private int path;
+
+                public WordSearchMatrix(char[][] matrix) {
+                    this.matrix = matrix;
+                    this.N = matrix.length;
+                }
+
+                public Optional&lt;int[][]&gt; searchWord(String searchWord) {
+                    solution = new char[N][N];
+                    path = 1;
+                    word = searchWord;
+
+                    // Go through entire matrix.
+                    for (int row = 0; row < N; row++) {
+                        for (int col = 0; col < N; col++) {
+
+                            // Note: charIndex is always 0 here because at this step we're always at the beginning
+                            // and findSolution does the recursive part.
+                            if (findSolution(int row, int col, 0)) {
+                                return solution;
+                            }
+                        }
+                    }
+                    return Optional.empty();
+                }
+
+                private boolean findSolution(int row, int col, int charIndex) {
+
+                    // If current cell is already visited or doesn't contain the correct char, then no solution here.
+                    if (solution[row][col] != 0 || matrix[row][col] != word.charAt(charIndex)) {
+                        return false;
+                    }
+
+                    // If we're at the last charIndex and it contains the correct char, we have a solution.
+                    if (charIndex == word.length() - 1) {
+                        solution[row][col] = path++;
+                        return true;
+                    }
+
+                    // We found a correct char. Let's continue.
+                    charIndex++;
+                    solution[row][col] = path++;
+
+                    // Go down.
+                    if (row + 1 < N && findSolution(row + 1, col, charIndex)) {
+                        return true;
+                    }
+
+                    // Go up.
+                    if (row - 1 >= 0 && search(row - 1, col, charIndex)) {
+                        return true;
+                    }
+
+                    // Go right.
+                    if (col + 1 < N && search(row, col + 1, charIndex)) {
+                        return true;
+                    }
+
+                    // Go left.
+                    if (col - 1 >= 0 && search(row, col - 1, charIndex)) {
+                        return true;
+                    }
+
+                    // Go diagonally up right.
+                    if (row - 1 >= 0 && col + 1 < N && search(row - 1, col + 1, charIndex)) {
+                        return true;
+                    }
+
+                    // Go diagonally up left.
+                    if (row - 1 >= 0 && col - 1 >= 0 && search(row - 1, col - 1, charIndex)) {
+                        return true;
+                    }
+
+                    // Go diagonally down left.
+                    if (row + 1 < N && col - 1 >= 0 && search(row + 1, col - 1, charIndex)) {
+                        return true;
+                    }
+
+                    // Go diagonally down right.
+                    if (row + 1 < N && col + 1 < N && search(row + 1, col + 1, charIndex)) {
+                        return true;
+                    }
+
+                    // If none of the above steps worked out --> BACKTRACK.
+                    path--;
+                    solution[row][col] = 0;
+                    return false;
+                }
+            }
+        </code>
+    </pre>
+
+</div>
+
+

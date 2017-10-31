@@ -1,0 +1,85 @@
+<div class="row">
+
+    <div class="col-lg-6 col-lg-offset-3 centering">
+        <h1>Recursion</h1>
+        <br>
+
+        <h3>When to use</h3>
+        <br>
+
+        <h4>Bad</h4>
+        <p>In most languages it's bad, because of Stack Overflow issues + it also takes some time to copy stuff to stack
+        etc. so it will run slower due to function call overhead.</p>
+        <br>
+
+        <h4>Good</h4>
+        <p>Elegant, simple. Some languages are well suited for it. Instead of the call stack being a problem, you can
+        actually take advantage of it in a clever way by doing <span class="b">iterative branching</span> --> for example
+        call a function multiple times in same loop but with different parameters, that's branching. If you try an
+        iterative solution, you often need a stack and you re-invent the wheel.</p>
+        <br>
+
+        <h3>Time Complexity</h3>
+        <p>Simple way: compute by reasoning about how many times function will be called.</p>
+        <br>
+        <p>More difficult cases: use <span class="b">Master Theorem</span> or <span class="b">guess and
+            use induction</span>. Example: recursive fibonacci --> T(n-1) + T(n-2) + T(1) -->
+            O(fib(n)) ~= O(1.6^n)</p>
+        <br>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <h3>Examples of Time Complexity</h3>
+
+        <pre>
+        <code ng-prism class="language-java">
+            // O(N/3) = O(N)
+            int function1(int n) {
+                if (n <= 0) {
+                    return 1;
+                } else {
+                    return 1 + recursiveFun1(n-3);
+                }
+            }
+
+            // O(log4 N) = O(log N)
+            int function2(int n) {
+                if (n <= 0) {
+                    return 1;
+                } else {
+                    return 1 + function2(n/4);
+                }
+            }
+
+            // O(2^N) --> Think of this as a binary tree with height N.
+            int function3(int n) {
+                if (n <= 0) {
+                    return 1;
+                } else {
+                    function3(n - 1);
+                    function3(n - 1);
+                }
+            }
+
+            // ???
+            int function4(int n) {
+                for (i = 0; i < n; i += 2) {
+                    System.out.println("Hello");
+                }
+
+                if (n <= 0) {
+                    return 1;
+                } else {
+                    return 1 + function4(n-5);
+                }
+            }
+        </code>
+    </pre>
+
+</div>
+
+

@@ -1,0 +1,83 @@
+<div class="row">
+
+    <div class="col-lg-6 col-lg-offset-3 centering">
+        <h1>QuickSort</h1>
+        <br>
+        <h3>What</h3>
+        <p><span class="b">Divide-and-conquer</span> algorithm that sorts with the help of a <span
+                class="b">pivot value</span>.</p>
+
+        <br>
+        <h3>How</h3>
+        <ul class="list-group">
+            <li class="list-group-item">Choose pivot</li>
+            <li class="list-group-item">Move small values to the left of pivot, greater to the right</li>
+            <li class="list-group-item">Recursively sort left and right part</li>
+        </ul>
+
+        <h3>Complexity</h3>
+        <p>Average/best time: <span class="b">O(N log N)</span></p>
+        <p>Worst time: <span class="b">O(N^2)</span> for example if first element is pivot in already sorted list</p>
+        <p>Space: <span class="b">O(log N)</span> for recursion</p>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <h3>Implementation</h3>
+    <pre>
+        <code ng-prism class="language-java">
+
+            public class Coderview {
+
+                private static void swap(int iFirst, int iSecond, Comparable[] list) {
+                    Comparable tmp = list[iFirst];
+                    list[iFirst] = list[iSecond];
+                    list[iSecond] = tmp;
+                }
+
+                private static int getAndPlacePivot(Comparable[] list, int iLeft, int iRight) {
+
+                    // Choose last element as pivot. Any element could be chosen, but this is one strategy.
+                    Comparable pivot = list[iRight];
+
+                    // Keep track of the last seen small value (smaller than pivot).
+                    int iLastSmall = iLeft - 1;
+
+                    // Step forward. If high value, do nothing. If low value, swap low to the left side.
+                    for (int iCurrent = iLeft; iCurrent < iRight; iCurrent++) {
+                        if (list[iCurrent].compareTo(pivot) <= 0) {
+                            swap(iLastSmall + 1, iCurrent, list);
+                            iLastSmall++;
+                        }
+                    }
+
+                    // Swap the first high value with the pivot, putting it into the right position.
+                    swap(iLastSmall + 1, iRight, list);
+                    return iLastSmall + 1;
+                }
+
+                public static void quickSort(Comparable[] list, int iLeft, int iRight) {
+
+                    // Base case - otherwise infinite recursion.
+                    if (iLeft >= iRight) {
+                        return;
+                    }
+
+                    // Get pivot index at correct place in list (smaller to the left and greater to the right).
+                    int iPivot = getAndPlacePivot(list, iLeft, iRight);
+
+                    // Recursively sort elements to the left and right side of the iPivot.
+                    quickSort(list, iLeft, iPivot - 1);
+                    quickSort(list, iPivot + 1, iRight);
+                }
+            }
+
+        </code>
+    </pre>
+
+</div>
+
+

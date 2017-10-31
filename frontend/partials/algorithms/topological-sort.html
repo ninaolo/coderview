@@ -1,0 +1,175 @@
+<div class="row">
+
+    <div class="col-lg-6 col-lg-offset-3 centering">
+        <h1>Topological Sort (graphs)</h1>
+        <br>
+
+        <h3>What</h3>
+        <p>Ordering for DAG's. Every parent must come before its child. Can be multiple for same graph.</p>
+        <br>
+        <img src="../img/topological-sort.png" height="200">
+        <p>This one has: <span class="b">5 4 2 3 1 0</span> and <span class="b">4 5 0 2 3 1</span> etc.</p>
+        <br>
+
+        <h3>How</h3>
+        <p>Kind of like DFS but with extra stack (recursion stack + stack).</p>
+        <br>
+
+        <h3>Time Complexity</h3>
+        <p>Same as DFS --> <span class="b">O(E + V)</span>.</p>
+
+        <h3>Applications</h3>
+        <p>1. Scheduling jobs with dependencies given as graph.</p><br>
+        <p>2. Finding order of compilation tasks to perform in makefiles.</p>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <h3>Implementation</h3>
+    <div class="tabbable" ng-init="tab = 1">
+        <ul class="nav nav-tabs">
+            <li ng-class="{'active': tab == 1}"><a ng-click="tab = 1">Topological Sort</a></li>
+            <li ng-class="{'active': tab == 2}"><a ng-click="tab = 2">Graph</a></li>
+            <li ng-class="{'active': tab == 3}"><a ng-click="tab = 3">Vertex</a></li>
+            <li ng-class="{'active': tab == 4}"><a ng-click="tab = 4">Edge</a></li>
+        </ul>
+        <div class="tab-content">
+
+            <div class="tab-pane" ng-class="{'active': tab == 1}" ng-if="tab == 1">
+                        <pre>
+                            <code ng-prism class="language-java">
+
+                                public class Coderview {
+
+                                    /*
+                                     * Topological sort for one entire DAG.
+                                     */
+                                    public static void topologicalSort(Graph graph) {
+                                        Stack&lt;Vertex&gt; stack = new Stack<>();
+                                        Set&lt;Integer&gt; visited = new HashSet<>();
+
+                                        // Go through entire graph.
+                                        for (Vertex current : graph.getVertices()) {
+                                            if (!visited.contains(current.getId())) {
+                                                topologicalSort(current, stack, visited);
+                                            }
+                                        }
+
+                                        // Print the stack.
+                                        while (!stack.isEmpty()) {
+                                            System.out.println(stack.pop().getId());
+                                        }
+                                    }
+
+                                    /*
+                                     * Recursive part of topological sort.
+                                     */
+                                    private static void topologicalSort(Vertex current, Stack&lt;Vertex&gt; stack, Set&lt;Integer&gt; visited) {
+                                        visited.add(current.getId());
+
+                                        for (Edge edge : current.getEdges()) {
+                                            Vertex neighbor = edge.getDestination();
+                                            if (!visited.contains(neighbor.getId())) {
+                                                topologicalSort(neighbor, stack, visited);
+                                            }
+                                        }
+
+                                        stack.push(current);
+                                    }
+                                }
+
+                            </code>
+                        </pre>
+            </div>
+
+
+            <div class="tab-pane" ng-class="{'active': tab == 2}" ng-if="tab == 2">
+                <pre>
+                    <code ng-prism class="language-java">
+
+                        public class Graph {
+
+                            private Vertex[] vertices;
+
+                            public Graph(Vertex[] vertices) {
+                                this.vertices = vertices;
+                            }
+
+                            public Vertex[] getVertices() {
+                                return vertices;
+                            }
+                        }
+
+                    </code>
+                </pre>
+            </div>
+
+
+            <div class="tab-pane" ng-class="{'active': tab == 3}" ng-if="tab == 3">
+                <pre>
+                    <code ng-prism class="language-java">
+
+                        public class Vertex {
+
+                            private int id;
+                            private Edge[] adjacencyList;
+
+                            public Vertex(int id) {
+                                this.id = id;
+                            }
+
+                            public int getId() {
+                                return id;
+                            }
+
+                            public Edge[] getEdges() {
+                                return adjacencyList == null ? new Edge[0] : adjacencyList;
+                            }
+
+                            public void setEdges(Edge[] adjacencyList) {
+                                this.adjacencyList = adjacencyList;
+                            }
+                        }
+
+                    </code>
+                </pre>
+            </div>
+
+
+            <div class="tab-pane" ng-class="{'active': tab == 4}" ng-if="tab == 4">
+                <pre>
+                    <code ng-prism class="language-java">
+
+                        public class Edge {
+
+                            private Vertex destination;
+                            private double weight;
+
+                            public Edge(Vertex destination, double weight) {
+                                this.destination = destination;
+                                this.weight = weight;
+                            }
+
+                            public Vertex getDestination() {
+                                return destination;
+                            }
+
+                            public double getWeight() {
+                                return weight;
+                            }
+                        }
+
+                    </code>
+                </pre>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+

@@ -1,0 +1,145 @@
+
+<div class="row">
+
+    <div class="col-md-6 col-md-offset-3">
+        <h3 class="centering">Pitfalls</h3>
+        <br>
+        <h4>Highest/lowest product problems</h4>
+        <p>Highest/lowest product doesn't only involve highest/lowest numbers. Also think of negative numbers -->
+        two very large negative numbers multiplied = a large positive. Easy to forget!</p>
+
+        <br>
+        <h4>Finding a sum among integers</h4>
+        <p>
+            Not needed to combine all with all (N^2). Previously seen Integers can be stored in HashMap and the
+            remaining needed number(s) expressed with the sum.
+        </p>
+        <br>
+
+        <h4>Recursion</h4>
+        <p>Don't forget the base case! Otherwise, you'll end up with infinite recursion.</p>
+        <br>
+
+        <h4>Bit operations</h4>
+        <p>
+            ALWAYS put parenthesis around bit operations.
+            Example: <code ng-prism class="language-java">if ((a & b) > 0) {}</code>  --> otherwise compile error.
+        </p>
+
+        <h3 class="centering">Personal</h3>
+        <ul>
+            <li>Worst bug</li>
+            <li>Conflicts with teammates</li>
+            <li>Something you learned</li>
+            <li>Most interesting</li>
+            <li>Failure</li>
+            <li>Great accomplishment</li>
+            <li>Great challenge</li>
+            <li>Influencing people</li>
+            <li>Showing leadership/ownership</li>
+            <li>Something you could have done differently in past project</li>
+            <li>What you like and dislike about favourite language</li>
+            <li>Own projects</li>
+        </ul>
+        <br>
+
+        <h3>Trivia</h3>
+        <ul>
+            <li>Highest Java Integer number = 2^31 - 1 = 2147483647. Integer has 32 bits and last bit is a sign bit.</li>
+            <li>
+                Default <code ng-prism class="language-java">boolean</code> value in
+                <code ng-prism class="language-java">boolean[]</code> is false.
+            </li>
+        </ul>
+
+        <h3>Bit manipulation</h3>
+        <br>
+
+        <h4>AND</h4>
+        <p>Multiply numbers --> 0 * 1 = 0 and so on...</p>
+
+        <pre>
+            <code ng-prism class="language-java">
+                int a = 60; // 00111100
+                int b = 13; // 00001101
+                int checker = 8; // 00001000
+                int insert = 254; // 11111110
+
+                // Result: a AND b = 00001100 = 12.
+                int c = a & b;
+
+                // Use case 1: check a certain bit.
+                if ((b & checker) > 0) {
+                    System.out.println("Bit nr 3 is 1.");
+                } else {
+                    System.out.println("Bit nr 3 is 0.");
+                }
+
+                // Use case 2: insert 0 somewhere.
+                int d = b & insert; // 00001100 = 12
+            </code>
+        </pre>
+
+        <br>
+        <h4>OR</h4>
+        <p>Result = 1 if first OR second is 1.</p>
+
+        <pre>
+            <code ng-prism class="language-java">
+                int a = 60; // 00111100
+                int b = 13; // 00001101
+                int insert = 1; // 00000001
+
+                // Result: a OR b = 00111101 = 61.
+                int c = a | b;
+
+                // Use case: insert 1 somewhere.
+                int d = a | insert; // 00111101 = 61
+            </code>
+        </pre>
+
+        <br>
+        <h4>XOR</h4>
+        <p>Exclusive OR. Result = 1 if both are exclusive (10 or 01).</p>
+
+        <pre>
+            <code ng-prism class="language-java">
+                int a = 60; // 00111100
+                int b = 13; // 00001101
+
+                // Result: a XOR b = 00110001 = 49.
+                int c = a ^ b;
+            </code>
+        </pre>
+
+        <br>
+        <h4>NOT</h4>
+        <p>Inverse the binary number. IMPORTANT: last bit = sign bit becomes 1 --> number becomes negative.</p>
+
+        <pre>
+            <code ng-prism class="language-java">
+                int a = 60; // 00111100
+
+                // Result: NOT a = 1...11000011 = -61.
+                int c = ~a;
+            </code>
+        </pre>
+
+
+        <br>
+        <h4>SHIFT LEFT/RIGHT</h4>
+        <p>Shifts bits n steps to left/right.</p>
+
+        <pre>
+            <code ng-prism class="language-java">
+                int a = 60; // 00111100
+                int b = 13; // 00001101
+
+                int c = a << 2; // 11110000 = 240
+                int d = a >> 2; // 00001111 = 15
+            </code>
+        </pre>
+
+    </div>
+
+</div>

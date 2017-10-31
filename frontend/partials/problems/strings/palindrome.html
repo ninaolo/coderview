@@ -1,0 +1,45 @@
+<div class="row">
+
+    <div class="col-lg-6 col-lg-offset-3 centering">
+        <h1>Palindrome</h1>
+        <br>
+
+        <h3>Description</h3>
+        <p>Write a function to determine if one String is a palindrome (forward = backwards).</p>
+        <br>
+
+        <h3>Solution</h3>
+        <p>Two pointers - one goes forward and one backwards to the middle.</p>
+        <br>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <h3>Solution</h3>
+
+        <pre>
+            <code ng-prism class="language-java">
+
+                public static boolean isPalindrome(String input) {
+                    int rightIdx = input.length() - 1;
+
+                    for (int leftIdx = 0; leftIdx < input.length() / 2; leftIdx++) {
+                        if (input.charAt(leftIdx) != input.charAt(rightIdx)) {
+                            return false;
+                        }
+                        rightIdx--;
+                    }
+
+                    return true;
+                }
+
+            </code>
+        </pre>
+
+</div>
+
+
+

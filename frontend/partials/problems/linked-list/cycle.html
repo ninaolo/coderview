@@ -1,0 +1,118 @@
+<div class="row">
+
+    <div class="col-lg-6 col-lg-offset-3 centering">
+        <h1>Detect Cycle in Linked List</h1>
+        <br>
+
+        <h3>Okay solution</h3>
+        <p>Go through list one by one and check if already visited with a HashSet.</p>
+
+        <p>Complexity --> <span class="b">O(N)</span> time and <span class="b">O(N)</span> space.</p>
+
+        <h3>Best solution</h3>
+        <p>Go through list with fast and slow runner. Slow runner takes one node at a time, fast takes two. If fast
+        catches up with slow, it's a cycle. If fast comes to the end (null), it's not a cycle.</p>
+
+        <p>Complexity --> <span class="b">O(N)</span> time and <span class="b">O(1)</span> space.</p>
+        <br>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <h3>Solution</h3>
+
+    <div class="tabbable" ng-init="tab = 1">
+        <ul class="nav nav-tabs">
+            <li ng-class="{'active': tab == 1}"><a ng-click="tab = 1">Okay solution</a></li>
+            <li ng-class="{'active': tab == 2}"><a ng-click="tab = 2">Better solution</a></li>
+            <li ng-class="{'active': tab == 3}"><a ng-click="tab = 3">Linked List Node</a></li>
+        </ul>
+    </div>
+
+    <div class="tab-pane" ng-if="tab == 1">
+        <pre>
+            <code ng-prism class="language-java">
+
+                public class Coderview {
+
+                    public static boolean hasCycle(Node startNode) {
+                        Set&lt;Integer&gt; visited = new HashSet<>();
+
+                        Node current = startNode;
+                        while (current.getNext() != null) {
+                            if (visited.contains(current.getId())) {
+                                return true;
+                            }
+
+                            visited.add(current.getId());
+                            current = current.getNext();
+                        }
+                        return false;
+                    }
+                }
+
+            </code>
+        </pre>
+    </div>
+
+
+    <div class="tab-pane" ng-if="tab == 2">
+        <pre>
+            <code ng-prism class="language-java">
+
+                public class Coderview {
+
+                    public static boolean hasCycle(Node startNode) {
+                        Node slow = startNode;
+                        Node fast = startNode;
+
+                        while (fast != null && fast.getNext() != null) {
+                            slow = slow.getNext();
+                            fast = fast.getNext().getNext();
+
+                            if (fast == slow) {
+                                return true;
+                            }
+                        }
+
+                        return false;
+                    }
+                }
+
+            </code>
+        </pre>
+    </div>
+
+
+    <div class="tab-pane" ng-if="tab == 3">
+        <pre>
+            <code ng-prism class="language-java">
+
+                public class Node {
+
+                    private final Integer id;
+                    private Node next;
+
+                    public Node(Integer id) {
+                        this.id = id;
+                    }
+
+                    public Node getNext() {
+                        return next;
+                    }
+
+                    public Integer getId() {
+                        return id;
+                    }
+                }
+
+            </code>
+        </pre>
+    </div>
+
+</div>
+
+

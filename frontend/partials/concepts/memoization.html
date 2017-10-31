@@ -1,0 +1,80 @@
+<div class="row">
+
+    <div class="col-lg-6 col-lg-offset-3 centering">
+        <h1>Memoization</h1>
+        <br>
+
+        <h3>What</h3>
+        <p>DP: Solve problems recursively when computations of subproblems overlap.</p>
+        <p>Memoization: Memorizing sub problems to avoid recomputing them.</p>
+        <br>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <h3>Example: calculate n'th fibonacci number</h3>
+    <p>
+        To calculate fibonacci(n) we need fibonacci(n-1) + fibonacci(n-2) --> leads to a lot of unnecessary recomputing.
+        We must use memoization! If we try to compute the 50th fibonacci nr with the slow and the fast one, we see a
+        huge difference in running time.
+        <br><br>
+    </p>
+
+
+
+    <div class="tabbable" ng-init="tab = 1">
+        <ul class="nav nav-tabs">
+            <li ng-class="{'active': tab == 1}"><a ng-click="tab = 1">Slow recursive fibonacci</a></li>
+            <li ng-class="{'active': tab == 2}"><a ng-click="tab = 2">Memoization fibonacci</a></li>
+        </ul>
+    </div>
+
+    <div class="tab-pane" ng-if="tab == 1">
+        <pre>
+            <code ng-prism class="language-java">
+
+                public class Coderview {
+                    public static int fibonacci(int n) {
+                        return n < 2 ? n : fibonacci(n-1) + fibonacci(n-2);
+                    }
+                }
+
+            </code>
+        </pre>
+    </div>
+
+
+    <div class="tab-pane" ng-if="tab == 2">
+        <pre>
+            <code ng-prism class="language-java">
+
+                public class Coderview {
+
+                    private static Map&lt;Integer, Long&gt; cache = new HashMap<>();
+
+                    public static long fibonacci(int n) {
+                        if (n < 2) {
+                            return n;
+                        }
+
+                        Long value = cache.get(n);
+
+                        if (value == null) {
+                            value = fibonacci(n-1) + fibonacci(n-2);
+                            cache.put(n, value);
+                        }
+
+                        return value;
+                    }
+                }
+
+            </code>
+        </pre>
+    </div>
+
+</div>
+
+

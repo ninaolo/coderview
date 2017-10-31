@@ -1,0 +1,137 @@
+<div class="row">
+
+    <div class="col-lg-6 col-lg-offset-3 centering">
+        <h1>Unique Characters in String</h1>
+        <br>
+
+        <h3>Description</h3>
+        <p>Write a function to determine if a String has all unique characters.</p>
+        <br>
+
+        <h3>Solution #1</h3>
+        <p>Assume ASCII = 256 chars. Store in boolean array. Go through entire String.</p>
+
+        <p>Complexity --> <span class="b">O(N)</span> time and <span class="b">O(1)</span> space.</p>
+        <br>
+
+        <h3>Solution #2</h3>
+        <p>Assume only [a-z] = 26 chars. Store in an int (32 bits). Go through entire String.</p>
+
+        <p>Complexity --> <span class="b">O(N)</span> time and <span class="b">O(1)</span> space.</p>
+        <br>
+
+        <h3>Solution #3</h3>
+        <p>
+            Assume any value of Java <code>char</code> = 16 bits --> 2^16 different values. Store in a BitSet with 2^16 = 65536.
+            Go through entire String.</p>
+
+        <p>Complexity --> <span class="b">O(N)</span> time and <span class="b">O(1)</span> space.</p>
+        <br>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <h3>Solution</h3>
+
+    <div class="tabbable" ng-init="tab = 1">
+        <ul class="nav nav-tabs">
+            <li ng-class="{'active': tab == 1}"><a ng-click="tab = 1">Solution #1</a></li>
+            <li ng-class="{'active': tab == 2}"><a ng-click="tab = 2">Solution #2</a></li>
+            <li ng-class="{'active': tab == 3}"><a ng-click="tab = 3">Solution #3</a></li>
+        </ul>
+    </div>
+
+    <div class="tab-pane" ng-if="tab == 1">
+        <pre>
+            <code ng-prism class="language-java">
+
+                public class Coderview {
+
+                    public static boolean uniqueChars(String string) {
+                        if (string.length() > 256) {
+                            return false;
+                        }
+
+                        boolean[] foundChars = new boolean[256];
+
+                        for (char character : string.toCharArray()) {
+                            if (foundChars[character]) {
+                                return false;
+                            }
+
+                            foundChars[character] = true;
+                        }
+
+                        return true;
+                    }
+                }
+
+            </code>
+        </pre>
+    </div>
+
+
+    <div class="tab-pane" ng-if="tab == 2">
+        <pre>
+            <code ng-prism class="language-java">
+
+                public class Coderview {
+
+                    public static boolean uniqueChars(String string) {
+                        if (string.length() > 26) {
+                            return false;
+                        }
+
+                        int foundChars = 0;
+
+                        for (char character : string.toCharArray()) {
+                            if ((foundChars & (1 << character)) > 0) {
+                                return false;
+                            }
+
+                            foundChars = foundChars | (1 << character);
+                        }
+
+                        return true;
+                    }
+                }
+
+            </code>
+        </pre>
+    </div>
+
+
+    <div class="tab-pane" ng-if="tab == 3">
+        <pre>
+            <code ng-prism class="language-java">
+
+                public class Coderview {
+
+                    public static boolean uniqueChars(String string) {
+                        int assumedNrOfPossibleChars = 1 << 16; // 2^16
+                        if (string.length() > assumedNrOfPossibleChars) {
+                            return false;
+                        }
+
+                        BitSet charset = new BitSet(assumedNrOfPossibleChars);
+                        for (char character : string.toCharArray()) {
+                            if (charset.get(character)) {
+                                return false;
+                            }
+                            charset.set(character);
+                        }
+                        return true;
+                    }
+                }
+
+            </code>
+        </pre>
+    </div>
+
+</div>
+
+
+

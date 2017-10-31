@@ -1,0 +1,45 @@
+<div class="row">
+
+    <div class="col-lg-6 col-lg-offset-3 centering">
+        <h1>Sum of two elements</h1>
+        <br>
+
+        <h3>Description</h3>
+        <p>
+            Given an array of integers and a sum, return indices of the two numbers such that they add up to the sum.
+        </p>
+        <br>
+
+        <h3>Complexity</h3>
+        <p>O(N) time + O(N) space for the HashMap.</p>
+        <br>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <h3>Solution</h3>
+
+    <pre>
+        <code ng-prism class="language-java">
+            public class Coderview {
+
+                public static Optional&lt;int[]&gt; findSumIndices(int[] numbers, int sum) {
+                    Map&lt;Integer, Integer&gt; numToIndex = new HashMap<>();
+
+                    for (int i = 0; i < numbers.length; i++) {
+                        int wanted = sum - numbers[i];
+                        if (numToIndex.containsKey(wanted)) {
+                            return Optional.of(new int[] { numToIndex.get(wanted), i });
+                        }
+
+                        numToIndex.put(numbers[i], i);
+                    }
+                    return Optional.empty();
+                }
+            }
+        </code>
+    </pre>
+</div>

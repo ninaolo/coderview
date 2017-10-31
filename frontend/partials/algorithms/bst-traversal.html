@@ -1,0 +1,73 @@
+<div class="row">
+
+    <div class="col-lg-6 col-lg-offset-3 centering">
+        <h1>Binary Search Tree Traversal</h1>
+        <br>
+
+        <h3>What</h3>
+        <p>There is <span class="b">pre-order</span>, <span class="b">in-order</span> and <span class="b">post-order
+        </span> traversal.</p>
+        <br>
+
+        <h3>How</h3>
+        <p>Recursively go through a binary tree. We have current, left and right node. <br> <br>
+            <span class="b">Pre-order</span>: current is "pre"/before --> current, left, right.<br>
+            <span class="b">In-order</span>: current is "in"/middle --> left, current, right.<br>
+            <span class="b">Post-order</span>: current is "post"/after --> left, right, current.<br>
+        </p>
+        <br>
+
+        <h3>When</h3>
+        <p>
+            <span class="b">Pre-order</span>: when you want to go through root nodes first.<br>
+            <span class="b">In-order</span>: when you want to get the real order of nodes.<br>
+            <span class="b">Post-order</span>: when you want to go through leaf nodes first.<br>
+        </p>
+        <br>
+
+        <h3>Time Complexity</h3>
+        <p></p>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <h3>Implementation</h3>
+    <pre>
+        <code ng-prism class="language-java">
+
+            public class Coderview {
+
+                public static void preOrderTraversal(Node node) {
+                    if (node != null) {
+                        System.out.println(node); // Current
+                        inOrderTraversal(node.getLeft()); // Left
+                        inOrderTraversal(node.getRight()); // Right
+                    }
+                }
+
+                public static void inOrderTraversal(Node node) {
+                    if (node != null) {
+                        inOrderTraversal(node.getLeft()); // Left
+                        System.out.println(node); // Current
+                        inOrderTraversal(node.getRight()); // Right
+                    }
+                }
+
+                public static void preOrderTraversal(Node node) {
+                    if (node != null) {
+                        inOrderTraversal(node.getLeft()); // Left
+                        inOrderTraversal(node.getRight()); // Right
+                        System.out.println(node); // Current
+                    }
+                }
+            }
+
+        </code>
+    </pre>
+
+</div>
+
+

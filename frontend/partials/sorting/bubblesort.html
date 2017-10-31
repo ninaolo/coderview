@@ -1,0 +1,62 @@
+<div class="row">
+
+    <div class="col-lg-6 col-lg-offset-3 centering">
+        <h1>BubbleSort</h1>
+        <br>
+        <h3>What</h3>
+        <p>A very <span class="b">simple </span>sorting algorithm using <span class="b">double for-loops</span>.
+         It's <span class="b">slow</span> and has a quite naïve approach.</p>
+
+        <br>
+        <h3>How</h3>
+        <ul class="list-group">
+            <li class="list-group-item">For every element...</li>
+            <li class="list-group-item">For every pair of elements...</li>
+            <li class="list-group-item">If left is greater than right - swap</li>
+        </ul>
+
+        <h3>Complexity</h3>
+        <p>Average/worst time: <span class="b">O(N^2)</span></p>
+        <p>Best time: <span class="b">O(N)</span> if list is already sorted. This is a small advantage.</p>
+        <p>Space: <span class="b">O(1)</span>. Also an advantage.</p>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <h3>Implementation</h3>
+    <pre>
+        <code ng-prism class="language-java">
+
+            public class Coderview {
+
+                private static void swap(int iFirst, int iSecond, Comparable[] list) {
+                    Comparable tmp = list[iFirst];
+                    list[iFirst] = list[iSecond];
+                    list[iSecond] = tmp;
+                }
+
+                public static void bubbleSort(Comparable[] list) {
+
+                    // Traverse list. For every element, traverse list with swapping pairs.
+                    // Note that iTraverse stops before last element and iPair goes to the last element.
+                    for (int iTraverse = 0; iTraverse < list.length - 1; iTraverse++) {
+                        for (int iPair = 1; iPair < list.length; iPair++) {
+
+                            // Swap if left > right.
+                            if (list[iPair - 1].compareTo(list[iPair]) > 0) {
+                                swap(iPair - 1, iPair, list);
+                            }
+                        }
+                    }
+                }
+            }
+
+        </code>
+    </pre>
+
+</div>
+
+

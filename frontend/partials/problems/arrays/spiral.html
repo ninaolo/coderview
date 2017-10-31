@@ -1,0 +1,66 @@
+<div class="row">
+
+    <div class="col-lg-6 col-lg-offset-3 centering">
+        <h1>Go through matrix in spiral</h1>
+        <br>
+
+        <h3>Solution</h3>
+        <p>
+
+        </p>
+        <br>
+
+        <h3>Complexity</h3>
+        <p>O(N) time + O(N) space for path.</p>
+        <br>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <h3>Solution</h3>
+
+    <pre>
+        <code ng-prism class="language-java">
+            public class Coderview {
+            
+                public static int[] spiral(int[][] matrix) {
+                    int col = matrix.length / 2;
+                    int row = matrix.length / 2;
+                    int[] path = new int[matrix.length * matrix.length];
+                    int pathIdx = 0;
+                    path[pathIdx] = matrix[col][row];
+
+                    for (int subSize = 3; subSize <= matrix.length; subSize += 2) {
+
+                        // Go 1 step left.
+                        path[++pathIdx] = matrix[row][--col];
+
+                        // Go down all the way.
+                        for (int i = 0; i < subSize - 2; i++) {
+                            path[++pathIdx] = matrix[++row][col];
+                        }
+
+                        // Go right all the way.
+                        for (int i = 0; i < subSize - 1; i++) {
+                            path[++pathIdx] = matrix[row][++col];
+                        }
+
+                        // Go up all the way.
+                        for (int i = 0; i < subSize - 1; i++) {
+                            path[++pathIdx] = matrix[--row][col];
+                        }
+
+                        // Go left all the way.
+                        for (int i = 0; i < subSize - 1; i++) {
+                            path[++pathIdx] = matrix[row][--col];
+                        }
+                    }
+                    return path;
+                }
+            }
+        </code>
+    </pre>
+</div>
